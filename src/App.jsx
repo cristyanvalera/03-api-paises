@@ -45,9 +45,11 @@ function App() {
             </form>
 
             {
-                hasError
+                !isLoading
+                    ? hasError
                     ? <p>Este país no existe: '{search}'</p>
-                    : <CountryCard country={country} />
+                        : <CountryCard country={country} />
+                    : <p>Cargando</p>
             }
         </div>
     );
