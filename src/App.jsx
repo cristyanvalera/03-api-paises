@@ -7,6 +7,7 @@ function App() {
     const [country, setCountry] = useState();
     const [search, setSearch] = useState('venezuela');
     const [hasError, setHasError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         let url = `https://restcountries.com/v3.1/name/${search}`;
@@ -14,14 +15,15 @@ function App() {
         axios.get(url)
             .then(res => {
                 setHasError(false);
-
-                setCountry(res.data[0]);
+                setCountry(res.data[0]); // cuando escribimos nombre de un país correcto
             })
             .catch(err => {
-                setHasError(true);
-
+                setHasError(true); // hay error
                 console.log(err);
-            });
+            })
+            .finally(() => {
+                setIsLoading(false);
+            })
     }, [search]);
 
     const textInput = useRef();
