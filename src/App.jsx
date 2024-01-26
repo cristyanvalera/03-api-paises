@@ -22,6 +22,9 @@ function App() {
                 console.log(err);
             })
             .finally(() => {
+                // setInterval(() => {
+                //     setIsLoading(false);
+                // }, 2000);
                 setIsLoading(false);
             })
     }, [search]);
@@ -45,11 +48,11 @@ function App() {
             </form>
 
             {
-                !isLoading
-                    ? hasError
-                    ? <p>Este país no existe: '{search}'</p>
+                isLoading
+                    ? <p>Loading...</p>
+                    : hasError
+                        ? <p>Este país no existe: '{search}'</p>
                         : <CountryCard country={country} />
-                    : <p>Cargando</p>
             }
         </div>
     );
